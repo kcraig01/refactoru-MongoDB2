@@ -35,7 +35,8 @@ var Applicant = mongoose.model('Applicant', {
 	bio: String,
 	skills: String,
 	years: Number,
-	why: String
+	why: String,
+	view: String
  });
 
 
@@ -59,11 +60,22 @@ app.post('/applicant', function(req, res){
 		bio: req.body.bio,
 		skills: req.body.skills,
 		years: req.body.years,
-		why: req.body.why
+		why: req.body.why,
+		view: true
 	})
 	applicant1.save();
 	res.send({success : applicant1});
 });
+
+app.get('/deleteapp', function(req, res){
+	var deleted = req.query.remove;
+	console.log(deleted);
+	Applicant.remove({ _id: deleted}, function(error){
+		console.log(error);
+		res.send({removed: deleted})
+	});
+	
+})
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

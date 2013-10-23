@@ -5,6 +5,6 @@ block content
 		h1 Applicants
 		ul#applications.list-unstyled
 			- for (var i = 0; i<applicants.length; i++){
-				li #{applicants[i].name} 
-				a#remove.btn.btn-primary.btn-small Remove 
+				li #{applicants[i].name}
+					a(data-id="#{applicants[i]._id}").remove.btn.btn-primary.btn-small Remove 
 			-}
